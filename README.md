@@ -1,10 +1,10 @@
 # Name of Application
 
-One Paragraph of project description goes here. Link to the live version of the app if it's hosted on Heroku.
+The Week 6 Checkpoint assignment at Prime Digital Academy was to create a simple messaging app using AngularJS and PostgreSQL. It shows a simple HTML form, where a user can submit their name and the text of a message. Clicking "Submit" causes the message to be saved in a SQL database. On both page load, and upon successfully submitting a new message, the messages are retrieved from the database and displayed as a list on the page.
 
 ## Built With
 
-List technologies and frameworks here
+AngularJS, PostgreSQL
 
 ## Getting Started
 
@@ -18,30 +18,6 @@ Steps to get the development environment running.
 2. `npm install`
 3. `npm start`
 
-And so on...
-
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
-
-### Completed Features
-
-High level list of items completed.
-
-- [x] Feature a
-- [x] Feature b
-
-### Next Steps
-
-Features that you would like to add at some point in the future.
-
-- [ ] Feature c
-
 ## Authors
 
-* Name of author(s)
-
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
+* Paul Heggeseth

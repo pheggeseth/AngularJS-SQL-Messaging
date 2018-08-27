@@ -18,12 +18,26 @@ app.controller('MessagesController', ['$http', function($http) {
   };
 
   vm.addMessage = function() {
-    console.log(vm.messageForm);
+    console.log('adding new message:', vm.messageForm);
     $http.post('/messages', vm.messageForm).then(function(response) {
       console.log('/messages POST success:', response);
+      vm.messageForm = {
+        name: '',
+        message: ''
+      };
       vm.getMessages();
     }).catch(function(error) {
       console.log('/messages POST error:', error);
+    });
+  };
+
+  // added delete for fun
+  vm.deleteMessage = function(id) {
+    $http.delete('/messages/'+id).then(function(response) {
+      console.log(`/messages/${id} DELETE success:`, response);
+      vm.getMessages();
+    }).catch(function(error) {
+      console.log(`/messages/${id} DELETE error:`, error);
     });
   };
 

@@ -42,4 +42,15 @@ router.post('/', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  const deleteId = req.params.id;
+  const queryText = `DELETE FROM "messages" WHERE "id" = $1;`;
+  pool.query(queryText, [deleteId])
+    .then(() => res.sendStatus(202))
+    .catch(error => {
+      console.log('/messages DELETE error:', error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

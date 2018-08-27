@@ -17,7 +17,7 @@
   </form>
   <ul>
     <li ng-repeat="message in vm.messages">
-      <b>{{message.name}}:</b> {{message.message}}
+      <b>{{message.name}}:</b> {{message.message}} <button ng-click="vm.deleteMessage(message.id)">X</button>
     </li>
   </ul>
 </body>
