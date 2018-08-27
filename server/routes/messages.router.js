@@ -19,6 +19,7 @@ pool.on('error', error => console.log('Error connecting to db', error));
 
 // get route params with "/route/:paramName, then reference it as req.params.paramName"
 router.get('/', (req, res) => {
+  console.log('/messages GET hit');
   const queryText = `SELECT * FROM "messages";`;
   pool.query(queryText)
     .then(results => res.send(results.rows))
@@ -29,23 +30,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // get data with req.body
-  // for posting to MongoDB, use something like...
-  // const modelToAdd = new Model(req.body);
-  // modelToAdd.save()
-  //  .then(() => res.sendStatus(201))
-  //  .catch(error => res.sendStatus(500));
-
-  // POSTGRESQL SAMPLE POST
-  // const itemToAdd = req.body; // This the data we sent
-  //   console.log('In POST route - product:', itemToAdd); // Has a name, size and cost
-  //   const query = 'INSERT INTO "table" ("column1", "column2", "column3") VALUES ($1, $2, $3);';
-  //   pool.query(query, [itemToAdd.value1, itemToAdd.value2, itemToAdd.value3])
-  //     .then(() => res.sendStatus(201))
-  //     .catch(error => {
-  //       console.log('Error in POST:', error);
-  //       res.sendStatus(500);
-  //   });
+  const messageToAdd = req.body; // This the data we sent
+    console.log('/messages POST hit:', messageToAdd); // Has a name, size and cost
+    const queryText = 'INSERT INTO "messages" ("name", "message") VALUES ($1, $2);';
+    pool.query(queryText, [messageToAdd.name, messageToAdd.message])
+      .then(() => res.sendStatus(201))
+      .catch(error => {
+        console.log('Error in POST:', error);
+        res.sendStatus(500);
+    });
 });
 
 router.put('/:id', (req, res) => {
