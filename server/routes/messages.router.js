@@ -1,52 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-// MONGODB SETUP
-// const mongoose = require('mongoose');
-// const databaseName = '';
-// const mongoURI = `mongodb://localhost:27017/${databaseName}`; // 27017 is the PORT that Mongo is running on
-// mongoose.connect(mongoURI, {useNewUrlParser: true}); // {useNewUrlParser: true} <- avoids a warning in the console
-// mongoose.connection.on('open', () => console.log('Connected to Mongo'));
-// mongoose.connection.on('error', error => console.log('ERROR CONNECTING TO MONGO', error));
-
-// MONGODB SCHEMA AND MODEL
-// const Schema = mongoose.Schema;
-// const modelSchema = new Schema({
-//   property: {type: String, Number, etc.}
-// });
-// const Model = mongoose.model('modelName', modelSchema);
-
 // POSTGRESQL SETUP
-// const pg = require('pg');
-// const Pool = pg.Pool;
-// const config = {
-//   database: 'name', // name of database
-//   host: 'localhost',
-//   port: 5432,
-//   max: 10, // max number of concurrent connections
-//   idleTimeoutMillis: 10000 // attepmt to connect for 10 seconds
-// };
+const pg = require('pg');
+const Pool = pg.Pool;
+const config = {
+  database: 'message_board', // name of database
+  host: 'localhost',
+  port: 5432,
+  max: 10, // max number of concurrent connections
+  idleTimeoutMillis: 10000 // attepmt to connect for 10 seconds
+};
 
-// const pool = new Pool(config);
-// pool.on('connect', () => console.log('postgresql connected!!!'));
-// pool.on('error', error => console.log('Error connecting to db', error));
+const pool = new Pool(config);
+pool.on('connect', () => console.log('postgresql connected!!!'));
+pool.on('error', error => console.log('Error connecting to db', error));
 
 
 // get route params with "/route/:paramName, then reference it as req.params.paramName"
 router.get('/', (req, res) => {
-  // MONGODB SAMPLE GET
-  // model.find({}) // or something like model.find({amount: {$gt: something, $lt: something}})
-  //   .then(models => res.send(models))
-  //   .catch(error => res.sendStatus(500));
-  // const query = 'SELECT * FROM "table-name";';
-
-  // POSTGRESQL SAMPLE GET
-  // pool.query(query)
-  //   .then(results => res.send(results.rows))
-  //   .catch(error => {
-  //     console.log('DB Query Error:', error);
-  //     res.sendStatus(500);
-  //   });
+  const queryText = `SELECT * FROM "messages";`;
+  pool.query(queryText)
+    .then(results => res.send(results.rows))
+    .catch(error => {
+      console.log('DB Query Error:', error);
+      res.sendStatus(500);
+    });
 });
 
 router.post('/', (req, res) => {
