@@ -10,7 +10,17 @@
   <script src="./scripts/client.js"></script>
 </head>
 <body ng-controller="MessagesController as vm">
-  Hello world.
-  {{vm.hello}}
+  <!-- Hello world.
+  {{vm.hello}} -->
+  <form ng-submit="vm.addMessage()">
+    <input ng-model="vm.messageForm.name" type="text" />
+    <input ng-model="vm.messageForm.message" type="text" />
+    <button type="submit">Submit</button>
+  </form>
+  <ul>
+    <li ng-repeat="message in vm.messages">
+      <b>{{message.name}}:</b> {{message.message}}
+    </li>
+  </ul>
 </body>
 </html>
