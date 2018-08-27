@@ -17,7 +17,6 @@ pool.on('connect', () => console.log('postgresql connected!!!'));
 pool.on('error', error => console.log('Error connecting to db', error));
 
 // '/messages' ROUTES
-
 // GET ALL MESSAGES
 router.get('/', (req, res) => {
   console.log('/messages GET hit');
